@@ -1,0 +1,64 @@
+[project]
+name = "advent2025"
+version = "0.1.0"
+description = "Advent of Code 2025 Solutions"
+requires-python = ">=3.11"
+dependencies = [
+    "colorama>=0.4.6",
+    "numpy>=2.3.5",
+    "pytest-profiling>=1.8.1",
+    "shapely>=2.1.2",
+    "z3-solver>=4.15.4.0",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+lint.select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+lint.ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "--cov=solutions --cov-report=term-missing --cov-report=html"
+pythonpath = [ "." ]
+
+[tool.coverage.run]
+source = ["solutions"]
+omit = ["tests/*", "*/input.txt"]
+
+[dependency-groups]
+dev = [
+    "black>=25.12.0",
+    "ty>=0.0.4",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.9",
+]
+
+[tool.uv]
+default-groups = "all"
